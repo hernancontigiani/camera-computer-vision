@@ -28,6 +28,8 @@ Small example of how to use and play with different techniques of computer visio
 # Main application 🔧⚙️
 __vision.py__ is the main script waiting for frames coming from MQTT camera (PC or cellphone) and apply computer vision algorithms. Open ".env" file and setup your MQTT broker configuration and CV algorithm to play around.
 
+For using detection algoriths, read models.md file and download your detector candidate.
+
 # Coming soon 🔧⚙️
 - Docker container for CV application.
 
