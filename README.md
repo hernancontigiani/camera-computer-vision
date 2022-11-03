@@ -1,5 +1,5 @@
 # Camera streaming with computer vision
-![banner](images/hc_computer_vision.png)
+![banner](images/banner.png)
 
 # About this project 🚀
 Small example of how to use and play with different techniques of computer vision using your PC web camera or cellphone by a Python web Flask server.
