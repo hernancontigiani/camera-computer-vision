@@ -22,6 +22,9 @@ let ctx = canvas.getContext('2d');
 
 
 // ---- MQTT Websockets ----
+const mqttBroker = document.location.hostname;
+const mqttUser = "";
+const mqttPassword = "";
 
 const client = new Paho.MQTT.Client(document.location.hostname, 9001, "iotcameracapture");
 
@@ -72,6 +75,8 @@ client.onMessageArrived = onMessageArrived;
 const options = {
   onSuccess: onConnect,
   onFailure: doFail,
+  userName: mqttUser,
+  password: mqttPassword,
 }
 // connect the client
 client.connect(options);

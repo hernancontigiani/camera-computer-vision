@@ -21,6 +21,9 @@ def on_connect(client, userdata, flags, rc):
 def mqtt_connect():
     if client.is_connected() is False:
         try:
+            user = ""
+            password = ""
+            client.username_pw_set(user, password)
             client.connect("localhost", 1883, 10)
             print("Conectado al servidor MQTT")
             client.loop_start()

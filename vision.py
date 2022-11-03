@@ -73,5 +73,6 @@ if __name__ == "__main__":
     client = mqtt.Client()
     client.on_connect = on_connect
     client.on_message = on_message
-    client.connect("localhost", 1883, 10)
+    client.username_pw_set(config["MQTT_USER"], config["MQTT_PASSWORD"])
+    client.connect(config["MQTT_BROKER"], int(config["MQTT_PORT"]), 10)
     client.loop_forever()
