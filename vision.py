@@ -1,3 +1,4 @@
+import time
 import json
 from PIL import Image
 import base64
@@ -46,7 +47,7 @@ def on_message(client, userdata, msg):
     topic = str(msg.topic)
     value = str(msg.payload.decode("utf-8"))
 
-    if topic == f"{base_topic}/raw":
+    if "/raw" in topic:
         img = json.loads(value)['imageData']
         img = img.replace('data:image/jpeg;base64,', '')
         img = img.replace(' ', '+')
@@ -66,7 +67,8 @@ def on_message(client, userdata, msg):
         im_bytes = im_arr.tobytes()
         im_b64 = base64.b64encode(im_bytes).decode('ascii')
         im_toDataUrl = 'data:image/jpeg;base64,' + im_b64
-        client.publish(f"{base_topic}/{detector_type}", json.dumps({"imageData": im_toDataUrl}))
+        post_topic = topic.replace("/raw", "")
+        client.publish(f"{post_topic}/{detector_type}", json.dumps({"imageData": im_toDataUrl}))
     
 
 if __name__ == "__main__":
