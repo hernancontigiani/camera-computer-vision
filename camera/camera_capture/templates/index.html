@@ -39,6 +39,15 @@
 
 </main>
 
+<script>
+  window.onload=function(){
+    $(function(){
+        if(window.location.protocol==="https:")
+            window.location.protocol="http";
+    });
+ }
+</script>
+
 <script src="{{ url_for('static', filename='js/jquery/jquery-3.4.1.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/jquery/velocity.min.js') }}"></script>
 <script src="{{ url_for('static', filename='js/jquery/velocity.ui.min.js') }}"></script>

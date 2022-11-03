@@ -3,13 +3,13 @@ import json
 
 from flask import Flask, request, jsonify, render_template, redirect
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path="/static2")
 app.secret_key = 'ptSecret'
 app.config['SECRET_KEY'] = 'ptSecret'
 
 
 # ---- Endpoints ----
-@app.route('/')
+@app.route('/capture')
 def home():
     return render_template('index.html')
 

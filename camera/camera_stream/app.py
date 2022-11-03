@@ -32,7 +32,7 @@ def mqtt_connect():
 
 
 # ---- Endpoints ----
-@app.route('/')
+@app.route('/stream')
 def home():
     mqtt_connect()
     return render_template('index.html')

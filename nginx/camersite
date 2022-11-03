@@ -1,0 +1,76 @@
+upstream camerastream {
+    server 127.0.0.1:5020;
+}
+
+upstream cameracapture {
+    server 127.0.0.1:5021;
+}
+
+upstream cameraview {
+    server 127.0.0.1:5022;
+}
+
+server {
+	listen 80;
+	listen [::]:80;
+
+	# SSL configuration
+    listen 443 ssl;
+	listen [::]:443 ssl;
+    ssl_certificate /etc/letsencrypt/live/brego.com.ar/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/brego.com.ar/privkey.pem;
+
+	server_name camera.brego.com.ar;
+
+       
+    location /stream {
+        proxy_pass http://camerastream$request_uri;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Prefix /;
+        proxy_redirect off;
+    }
+
+    location /socket.io {
+        proxy_pass http://camerastream/socket.io;
+        include proxy_params;
+        proxy_http_version 1.1;
+        proxy_buffering off;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+    }
+    
+    location /capture {
+        proxy_pass http://cameracapture$request_uri;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Prefix /;
+        proxy_redirect off;
+    }
+
+    location /view {
+        proxy_pass http://cameraview$request_uri;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Forwarded-Host $host;
+        proxy_set_header X-Forwarded-Prefix /;
+        proxy_redirect off;
+    }
+
+    location /static  {
+      alias /home/camera-computer-vision/camera/camera_stream/static;
+    }
+
+    location /static2  {
+      alias /home/camera-computer-vision/camera/camera_capture/static;
+    }
+
+    location / {
+        return 301 /stream;
+        # First attempt to serve request as file, then
+        # as directory, then fall back to displaying a 404.
+        try_files $uri $uri/ /index.html =404;
+    }
+}
