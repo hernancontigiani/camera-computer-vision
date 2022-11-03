@@ -1,5 +1,5 @@
 :root{
-  --bar-height: 60px;
+  --bar-height: 200px;
   --bg-black: #333333;
   --bg-gray-light: #fffff8;
   --bg-gray: #c7c7c7;
@@ -34,12 +34,18 @@ body {
 
 /* ------- Header style ------- */
 header {
-  background: var(--bg-black);
-  height: var(--bar-height);
-  color: var(--text-gray);
   display: flex;
   align-items: center;
-  font-size: 30px;
+  justify-content: center;
+  width: auto;
+  height: auto;
+}
+
+header img {
+  max-height: var(--bar-height);
+  max-width: 100%;
+  width: auto;
+  height: auto;
 }
 
 header div {

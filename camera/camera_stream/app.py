@@ -44,6 +44,9 @@ def ws_camera_event(data):
 
 if __name__ == "__main__":
     client.on_connect = on_connect
-    # Certificados SSL:
+    # IN LOCAL HOST Certificados SSL:
     # https://blog.miguelgrinberg.com/post/running-your-flask-application-over-https
     app.run(debug=True, host="0.0.0.0", port=5020, ssl_context='adhoc')
+
+    # IN REMOTE HOST
+    #app.run(debug=True, host="0.0.0.0", port=5020)
