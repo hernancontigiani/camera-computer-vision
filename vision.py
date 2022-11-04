@@ -12,7 +12,7 @@ import paho.mqtt.client as mqtt
 detectors = {}
 
 from features import EdgeDetector
-detectors["edges"] = EdgeDetector()
+detectors["edges"] = EdgeDetector(edge_only=True)
 
 from features import Segmentation
 detectors["segmentation"] = Segmentation()
